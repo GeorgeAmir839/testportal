@@ -1,6 +1,8 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\CompanyController;
 
 /*
 |--------------------------------------------------------------------------
@@ -18,11 +20,13 @@ Route::get('/', function () {
 });
 
 Route::get('/dashboard', function () {
+
     return view('dashboard');
 })->middleware(['auth'])->name('dashboard');
 
 require __DIR__.'/auth.php';
+Route::resource('users', UserController::class);
+Route::resource('companies', CompanyController::class);
 
+Route::get('/{page}', [App\Http\Controllers\AdminController::class, 'index']);
 
-
-Route::get('/{page}', 'AdminController@index');
