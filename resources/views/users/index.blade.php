@@ -59,6 +59,7 @@
                                 <tr>
                                     <th class="border-bottom-0">#</th>
                                     <th class="border-bottom-0">Name</th>
+                                    <th class="border-bottom-0">Avatar</th>
                                     <th class="border-bottom-0">Email</th>
                                     <th class="border-bottom-0">Company</th>
                                     <th class="border-bottom-0">Action</th>
@@ -72,9 +73,14 @@
                                     <td>{{ $loop->iteration }}</td>
                                     
                                     <td>{{ $item->name }}</td>
+                                    <td><a class="btn default btn-outline  " target="_blank" href="{{asset($item->avatar)}}">
+                                        
+                                        <img class="img img-responsive" width="50" height="50"  src="{{asset($item->avatar)}}">
+                                    </a></td>
                                     <td>{{ $item->email }}</td>
                                     
-                                    <td>{{ $item->company->name }}</td>
+                                    
+                                    <td>{{ @$item->company->name }}</td>
                                    
                                     <td>
                                         <div class="row">

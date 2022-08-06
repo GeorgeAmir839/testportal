@@ -50,8 +50,16 @@ class UserController extends Controller
                 'company_id' => 'required',
             ]
         );
-        
-        User::create($request->all());
+        $data = $request->all();
+        if ($request->avatar) {
+            $data['avatar'] = $this->storeImage($request->avatar, "users");
+
+        }
+        // $fileName = time().$request->file('avatar')->getClientOriginalName();
+        // $path = $request->file('avatar')->storeAs('users', $fileName, 'public');
+        // $data['avatar'] = '/storage/'.$path;
+        // dd($data['avatar'], $data);
+        User::create($data);
         
             return redirect()->route('users.index')->with('message', 'IT WORKS!');
       
@@ -81,7 +89,12 @@ class UserController extends Controller
     public function update(Request $request, $id)
     {
         $user= User::findOrFail($id);
-         $user->update($request->all());
+        $data = $request->all();
+        if ($request->avatar) {
+            $data['avatar'] = $this->storeImage($request->avatar, "users");
+
+        }
+         $user->update($data);
        
             return redirect()->route('users.index')->with('message', 'IT WORKS!');
        

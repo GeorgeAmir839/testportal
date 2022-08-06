@@ -22,7 +22,7 @@
                     Create</span>
             </div>
         </div>
-        
+
     </div>
     <!-- breadcrumb -->
 @endsection
@@ -36,7 +36,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <form action="{{ route('users.store') }}" method="POST">
+                        <form action="{{ route('users.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label>Firstname &amp; Lastname</label>
@@ -54,15 +54,25 @@
 
                             </div>
                             <div class="form-group">
-                            <label>Company</label>
-                            <select class="form-control @error('company_id') is-invalid @enderror" name="company_id"  required>
-                                @foreach ($companies as $company)
-                                    <option value="{{ $company->id }}" >
-                                        {{ $company->name }}</option>
-                                @endforeach
-                            </select>
-                            
-                        </div>
+                                <label for="exampleInputuname" class="required">Image</label>
+                                <div class="input-group">
+                                    <input type="file"
+                                   
+                                           accept="image/x-png,image/gif,image/jpeg"
+                                           name="avatar" class="dropify">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label>Company</label>
+                                <select class="form-control @error('company_id') is-invalid @enderror" name="company_id"
+                                    required>
+                                    @foreach ($companies as $company)
+                                        <option value="{{ $company->id }}">
+                                            {{ $company->name }}</option>
+                                    @endforeach
+                                </select>
+
+                            </div>
                             <div class="form-group">
                                 <label>Email</label> <input class="form-control @error('email') is-invalid @enderror"
                                     type="email" name="email" placeholder="Enter your email">
@@ -74,8 +84,9 @@
                             </div>
 
                             <div class="form-group">
-                                <label>Password</label> <input name="password" class="form-control @error('password') is-invalid @enderror" placeholder="Enter your password"
-                                     type="password">
+                                <label>Password</label> <input name="password"
+                                    class="form-control @error('password') is-invalid @enderror"
+                                    placeholder="Enter your password" type="password">
                                 @error('password')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>
@@ -87,7 +98,8 @@
 
 
                                 <input id="password-confirm" type="password"
-                                    class="form-control @error('password') is-invalid @enderror" name="password_confirmation" required autocomplete="new-password">
+                                    class="form-control @error('password') is-invalid @enderror"
+                                    name="password_confirmation" required autocomplete="new-password">
 
                             </div>
                             <button type="submit" class="btn btn-main-primary btn-block mt-2">Create</button>

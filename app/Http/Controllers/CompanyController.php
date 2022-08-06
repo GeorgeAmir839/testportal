@@ -41,17 +41,18 @@ class CompanyController extends Controller
         $this->validate(
             request(),
             [
-                // 'name' => 'required|max:120',
-                // 'email' => 'required|email|unique:Companies,email,' . $id,
-                // "banner"  => "required",
-                // "banner"  => "dimensions:max_width=300,max_height=300",
-
-                // 'Company_type' => 'required',
-                // 'phone' => 'required|unique:Companies,phone,'. $id,
+                'name' => 'required|max:120',
+                "logo"  => "required",
+               
             ]
         );
-        
-        Company::create($request->all());
+        $data = $request->all();
+        // dd($data,$request->logo);
+        if ($request->logo) {
+            $data['logo'] = $this->storeImage($request->logo, "companies");
+
+        }
+        Company::create($data);
         
             return redirect()->route('companies.index')->with('message', 'IT WORKS!');
       
@@ -80,7 +81,12 @@ class CompanyController extends Controller
     public function update(Request $request, $id)
     {
         $Company= Company::findOrFail($id);
-         $Company->update($request->all());
+        $data = $request->all();
+        if ($request->logo) {
+            $data['logo'] = $this->storeImage($request->logo, "companies");
+
+        }
+         $Company->update($data);
        
             return redirect()->route('companies.index')->with('message', 'IT WORKS!');
        

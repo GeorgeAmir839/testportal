@@ -70,8 +70,10 @@
                                     
                                     <td>{{ $item->name }}</td>
                                     <td>{{ $item->address }}</td>
-                                    <td>{{ $item->logo }}</td>
-                                   
+                                    <td><a class="btn default btn-outline  " target="_blank" href="{{asset($item->logo)}}">
+                                        
+                                        <img class="img img-responsive" width="50" height="50"  src="{{asset($item->logo)}}">
+                                    </a></td>                                   
                                     <td>
                                         <div class="row">
                                             <a class="btn btn-soft-primary btn-icon btn-circle btn-sm" href="{{route('companies.edit', $item->id )}}" title="{{ trans('Edit') }}">

@@ -40,7 +40,7 @@
                 </div>
                 <div class="card-body">
                     <div class="table-responsive">
-                        <form action="{{ route('companies.store') }}" method="POST">
+                        <form action="{{ route('companies.store') }}" method="POST" enctype="multipart/form-data">
                             @csrf
                             <div class="form-group">
                                 <label>Name</label>
@@ -57,7 +57,15 @@
                                 @enderror
 
                             </div>
-                            
+                            <div class="form-group">
+                                <label for="exampleInputuname" class="required">Image</label>
+                                <div class="input-group">
+                                    <input type="file"
+                                   
+                                           accept="image/x-png,image/gif,image/jpeg"
+                                           name="logo" class="dropify">
+                                </div>
+                            </div>
                             <div class="form-group">
                                 <label>Address</label> <input class="form-control @error('address') is-invalid @enderror"
                                     type="text" name="address" placeholder="Enter address">
